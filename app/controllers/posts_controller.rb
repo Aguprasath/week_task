@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
   before_action :find_topic, except: %i[index]
+  before_action :set_post, only: %i[show edit update destroy]
 
   # GET /topics/:topic_id/posts or /topics/:topic_id/posts.json
   def index

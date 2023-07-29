@@ -3,7 +3,7 @@
 <%= render @post %>
 
 <div>
-  <%= link_to "Edit this post", edit_topic_post_path(@post)   %> |
+  <%= link_to "Edit this post", edit_topic_post_path(@post.topic,@post)   %> |
   <%= link_to "Back to posts",topic_posts_path %>
 
   <%= button_to "Destroy this post",  topic_post_path(@post.topic, @post), method: :delete %>
