@@ -8,3 +8,7 @@
 
   <%= button_to "Destroy this post",  topic_post_path(@post.topic, @post), method: :delete %>
 </div>
+<div>
+  <%= link_to "Comments",topic_post_comments_path(@post.topic,@post) %>
+
+</div>

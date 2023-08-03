@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
-  before_action :find_topic, except: %i[index]
+  before_action :find_topic
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /topics/:topic_id/posts or /topics/:topic_id/posts.json
   def index
-    @topic = Topic.find(params[:topic_id]) # Load the topic for the index action
-    @posts = @topic.posts.all
+    if (params[:topic_id].present?)
+      @posts = @topic.posts.all
+    else
+      @posts=Post.all
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -23,7 +26,11 @@ class PostsController < ApplicationController
 
   # POST /topics/:topic_id/posts or /topics/:topic_id/posts.json
   def create
-    @post = @topic.posts.new(post_params) # Create the post associated with the topic
+    @post = @topic.posts.new(post_params)
+    @post.tags << Tag.where(id: params[:post][:tag_ids])
+    new_tags = params[:post][:tag_names].split(',').map(&:strip)
+    new_tags.each { |tag_name| @post.tags << Tag.find_or_create_by(name: tag_name) }
+
 
     respond_to do |format|
       if @post.save
@@ -38,6 +45,11 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    @post.tags = Tag.where(id: params[:post][:tag_ids])
+    new_tags = params[:post][:tag_names].split(',').map(&:strip)
+    new_tags.each { |tag_name| @post.tags << Tag.find_or_create_by(name: tag_name) }
+    #new_tags.each { |tag_name| @post.tags << ( tag_name) }
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully updated." }
@@ -66,11 +78,13 @@ class PostsController < ApplicationController
   end
 
   def find_topic
-    @topic = Topic.find(params[:topic_id])
+    if (params[:topic_id].present?)
+      @topic = Topic.find(params[:topic_id])
+    end
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content,tag_ids: [])
   end
 end

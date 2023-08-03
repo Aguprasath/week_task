@@ -3,13 +3,19 @@
 <h1>Posts</h1>
 
 <div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", topic_post_path(post.topic, post) %>
-    </p>
-  <% end %>
-</div>
+  <% if params[:topic_id].present? %>
+      <% @posts.each do |post| %>
+        <%= render post %>
 
-<%= link_to "New post", new_topic_post_path %><br>
-<%= link_to "Back to Topics",topics_path %>
+          <%= link_to "Show this post", topic_post_path(post.topic, post) %>
+
+      <% end %>
+
+    <%= link_to "New post", new_topic_post_path %><br>
+    <%= link_to "Back to Topics",topics_path %>
+  <%else %>
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  <%end %>
+</div>
