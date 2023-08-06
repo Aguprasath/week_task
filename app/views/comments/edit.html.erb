@@ -5,6 +5,6 @@
 <br>
 
 <div>
-  <%= link_to "Show this comment",topic_post_comment_path(@post.topic,@post,@comment) %> |
-  <%= link_to "Back to comments", topic_post_comments_path(@post.topic,@post) %>
+  <%= link_to "Show this comment",topic_post_comment_path(@post.topic,@post,@comment),class: "link" %> |
+  <%= link_to "Back to comments", topic_post_comments_path(@post.topic,@post),class: "link" %>
 </div>

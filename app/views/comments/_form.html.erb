@@ -1,3 +1,4 @@
+<div class="box">
 <%= form_with(model: [ @post.topic, @post, @comment]) do |form| %>
   <% if comment.errors.any? %>
     <div style="color: red">
@@ -21,3 +22,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

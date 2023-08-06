@@ -4,11 +4,13 @@
 
 <div >
   <% @topics.each do |topic| %>
-    <%= render topic %>
+      <%= render topic %>
 
-      <%= link_to "Show this topic", topic %><br>
-      <%= link_to "Show Posts",topic_posts_path(topic) %><br>
+      <%= link_to "Show this topic", topic ,class: "link"%><br><br>
+      <%= link_to "Show Posts",topic_posts_path(topic),class: "link" %>
+    <br>
   <% end %>
-</div>
 
-<%= link_to "New topic", new_topic_path %>
+</div>
+<br>
+<%= link_to "New topic", new_topic_path,class: "link" %>

@@ -1,16 +1,17 @@
 
 h1 {
     display: flex;
-    padding: 5px;
+    padding: 0px;
     align-content: center;
     justify-content: center;
     color: black;
     font-size: 40px;
     font-family: "Book Antiqua";
-    border: 2px solid black ;
+
 }
 body{
-
+    padding: 5px;
+    line-height: 20px;
     background: linear-gradient(to right, ghostwhite,gray);
 }
 div{
@@ -18,39 +19,57 @@ div{
     font-size: 20px;
     font-family: "Roboto Light";
     padding: 20px;
-    background-color: gray;
 }
 p{
     color: black;
-    border: #666666;
-    padding: 0px;
-    background: linear-gradient(to right, ghostwhite,gray);
+    padding: 3px;
 }
+.right{
+    justify-content: right;
+    display: inline-block;
+    text-align: right;
+    margin-bottom: 20px;
+    font-size: 17px;
+    color: black;
+    background-color: ghostwhite;
+    padding: 2px;
+    text-decoration: underline;
+    border-radius: 5px;
+    border: 1.5px solid black;
+    font-family: "Lato";
+}
+
 .box{
+    text-align: center;
+    line-height: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     border-radius: 20px;
-    background: linear-gradient(to right, plum,skyblue);
+    background: gray;
     padding: 20px;
-    #font-family: "Roboto Light";
+    font-family: "Roboto Light";
     border: 1.5px solid black;
     font-size: 20px;
 }
 .link {
-
+    margin-bottom: 20px;
+    font-size: 17px;
     color: black;
     background-color: ghostwhite;
-    padding: 5px;
+    padding: 2px;
     text-decoration: underline;
     border-radius: 5px;
     border: 1.5px solid black;
     font-family: "Lato";
 }
 .button{
+    margin-bottom: 20px;
     color: black;
     #background-color: white;
-    padding: 10px;
+    padding: 2px;
     text-decoration: underline;
     border-radius: 5px;
     border: 1.5px solid black;
     font-family: "Lato";
-    font-size: 18px;
+    font-size: 17px;
 }

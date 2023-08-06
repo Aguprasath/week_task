@@ -1,21 +1,27 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Posts</h1>
-
-<div id="posts">
+<div >
   <% if params[:topic_id].present? %>
+      <p>
       <% @posts.each do |post| %>
-        <%= render post %>
 
-          <%= link_to "Show this post", topic_post_path(post.topic, post) %>
+
+        <%= render post %>
+      <br>
+          <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
 
       <% end %>
+      </p>
+    <%= link_to "New post", new_topic_post_path ,class: "link"%>
+    <%= link_to "Back to Topics",topics_path ,class: "link"%> <br><br>
 
-    <%= link_to "New post", new_topic_post_path %><br>
-    <%= link_to "Back to Topics",topics_path %>
   <%else %>
     <% @posts.each do |post| %>
-      <%= render post %>
-    <% end %>
+      <%= render post %><br>
+      <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
+
+<% end %>
+
   <%end %>
 </div>

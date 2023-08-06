@@ -1,6 +1,8 @@
-<div id="<%= dom_id post %>">
-    <strong>Title:</strong>
-    <%= post.title %>
+<div class="box">
+
+ <strong>Title:</strong>
+    <%= post.title%>
+  <%= "(#{post.topic.title})" %>
 <br>
     <strong>Content:</strong>
     <%= post.content %>
