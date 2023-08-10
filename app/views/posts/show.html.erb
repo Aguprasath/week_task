@@ -1,6 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <div class="box">
   <%= render @post %>
+  <strong> Image :</strong> <br>
+  <% if (@post.image.attached?) %>
+    <%=image_tag @post.image %>
+  <%else %>
+    <%= "No Image" %>
+  <%end %><br>
+
+
   <strong>Ratings:</strong><br>
   <% @star_counts.each do |star,count| %>
   <%="#{star} star : #{count}" %><br>

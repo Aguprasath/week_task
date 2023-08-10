@@ -47,6 +47,8 @@ gem 'factory_bot_rails'
 
 gem 'faker'
 gem 'kaminari-rspec'
+gem "image_processing", ">= 1.2"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
