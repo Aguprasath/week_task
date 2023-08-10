@@ -5,9 +5,10 @@
   <% if params[:topic_id].present? %>
       <p>
       <% @posts.each do |post| %>
+          <div class="box">
+            <%= render post %>
+          </div>
 
-
-        <%= render post %>
       <br>
           <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
 
@@ -15,7 +16,7 @@
       </p>
     <%= link_to "New post", new_topic_post_path ,class: "link"%>
     <%= link_to "Back to Topics",topics_path ,class: "link"%> <br><br>
-    <%= link_to_prev_page @posts, '<<Previous page ' ,class: "link" %>
+    <%= link_to_previous_page @posts, '<<Previous page ' ,class: "link" %>
     <%= link_to_next_page @posts, ' Next page>>',class: "right"%>
   <%else %>
     <% @posts.each do |post| %>
@@ -24,7 +25,7 @@
 
 <% end %>
     <br><br>
-    <%= link_to_prev_page @posts, '<<Previous page ' ,class: "link" %>
+    <%= link_to_previous_page @posts, '<<Previous page ' ,class: "link" %>
     <%= link_to_next_page @posts, ' Next page>>',class: "right"  %>
 
   <%end %>

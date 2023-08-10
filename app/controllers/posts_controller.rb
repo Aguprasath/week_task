@@ -5,14 +5,17 @@ class PostsController < ApplicationController
   # GET /topics/:topic_id/posts or /topics/:topic_id/posts.json
   def index
     if (params[:topic_id].present?)
-      @posts = @topic.posts.page(params[:page]).per(10)
+      @posts = @topic.posts.page(params[:page]).per(3)
     else
-      @posts=Post.page(params[:page]).per(10)
+      @posts=Post.page(params[:page]).per(3)
     end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+
+    @rating = Rating.new
+    @star_counts = @post.ratings.group(:star).count
   end
 
   # GET /topics/:topic_id/posts/new
@@ -83,7 +86,8 @@ class PostsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = @topic.posts.find(params[:id])
+
   end
 
   def find_topic

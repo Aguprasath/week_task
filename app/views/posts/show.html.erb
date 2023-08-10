@@ -1,6 +1,12 @@
 <p style="color: green"><%= notice %></p>
+<div class="box">
+  <%= render @post %>
+  <strong>Ratings:</strong><br>
+  <% @star_counts.each do |star,count| %>
+  <%="#{star} star : #{count}" %><br>
+  <% end %>
+</div>
 
-<%= render @post %>
 
 <div>
   <%= link_to "Edit this post", edit_topic_post_path(@post.topic,@post) ,class: "link"  %> |
@@ -9,6 +15,8 @@
   <%= button_to "Destroy this post",  topic_post_path(@post.topic, @post), method: :delete ,class: "button"%>
 </div>
 <div>
-  <%= link_to "Comments",topic_post_comments_path(@post.topic,@post),class: "link" %>
 
+  <%= link_to "Comments",topic_post_comments_path(@post.topic,@post),class: "link" %>
+  <%= render "ratings/form",rating: @rating %>
+  <%#= link_to "New Ratings", new_topic_post_rating_path(@post.topic,@post) %>
 </div>
