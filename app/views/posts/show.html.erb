@@ -8,11 +8,11 @@
     <%= "No Image" %>
   <%end %><br>
 
-
-  <strong>Ratings:</strong><br>
-  <% @star_counts.each do |star,count| %>
-  <%="#{star} star : #{count}" %><br>
-  <% end %>
+   <%= render 'ratings/rating',star_counts: @star_counts %>
+  <#strong>Ratings:<#/strong><br>
+  <% #@star_counts.each do |star,count| %>
+  <%#="#{star} star : #{count}" %><br>
+  <%# end %>
 </div>
 
 
