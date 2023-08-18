@@ -10,8 +10,11 @@
           </div>
 
       <br>
+      <%= link_to "Comments",topic_post_comments_path(post.topic,post),class: "link" %>
+      <br>
+      <%if can?(:manage,post) %>
           <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
-
+        <%end %>
       <% end %>
       </p>
     <%= link_to "New post", new_topic_post_path ,class: "link"%>

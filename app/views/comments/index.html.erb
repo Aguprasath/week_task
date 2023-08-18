@@ -6,8 +6,10 @@
   <% @comments.each do |comment| %>
     <%= render comment %>
     <p>
+      <%if can?(:manage,comment) %>
       <%= link_to "Show this comment",topic_post_comment_path(@post.topic,@post,comment),class:"link"%>
-    </p>
+      <%end %>
+        </p>
   <% end %>
 </div>
 

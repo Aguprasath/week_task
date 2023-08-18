@@ -24,7 +24,6 @@
 </div>
 <div>
 
-  <%= link_to "Comments",topic_post_comments_path(@post.topic,@post),class: "link" %>
   <%= render "ratings/form",rating: @rating %>
   <%#= link_to "New Ratings", new_topic_post_rating_path(@post.topic,@post) %>
 </div>

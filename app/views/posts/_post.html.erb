@@ -1,5 +1,7 @@
-
-
+ <% if (post.user.present?) %>
+ <strong>Author Mail : </strong>
+ <%=post.user.email %><br>
+   <%end%>
  <strong>Title:</strong>
     <%= post.title%>
   <%= "(#{post.topic.title})" %>
