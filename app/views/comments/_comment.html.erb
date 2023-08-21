@@ -1,7 +1,9 @@
 <div , class="box">
   <p>
+    <% if (comment.user.present?) %>
     <strong>Author Mail : </strong>
     <%=comment.user.email %><br>
+      <%end %>
     <strong>Content:</strong>
     <%= comment.content %>
   </p>

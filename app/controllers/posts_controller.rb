@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     else
       @posts=Post.page(params[:page]).per(3)
     end
+
   end
 
   # GET /posts/1 or /posts/1.json
@@ -16,6 +17,7 @@ class PostsController < ApplicationController
 
     @rating = Rating.new
     @star_counts = @post.ratings.group(:star).count
+
   end
 
   # GET /topics/:topic_id/posts/new
@@ -86,6 +88,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
