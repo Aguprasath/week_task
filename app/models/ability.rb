@@ -9,7 +9,9 @@ class Ability
     #   return unless user.present?
        can :read, :all
     #   return unless user.admin?
+
        can :manage,[Post,Comment], user_id: user.id
+       can :mark_as_read, :all
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

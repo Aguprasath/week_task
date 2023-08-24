@@ -88,7 +88,13 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def mark_as_read
+    if current_user.read_posts.exclude?(@post)
+      current_user.read_posts << @post
+    end
+    head :no_content
 
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :tags
   resources :topics do
     resources :posts do
+      member do
+        post 'mark_as_read'
+      end
       resources :ratings
       resources :comments
     end

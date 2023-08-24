@@ -7,14 +7,17 @@
       <% @posts.each do |post| %>
           <div class="box">
             <%= render post %>
+            <strong>Status: </strong>
+            <%= 'unread' if current_user.read_posts.exclude?(post) %>
+            <%=  'Read' if current_user.read_posts.include?(post)%>
           </div>
 
       <br>
       <%= link_to "Comments",topic_post_comments_path(post.topic,post),class: "link" %>
-      <br>
-      <%if can?(:manage,post) %>
+      <br><br>
+
           <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
-        <%end %>
+
       <% end %>
       </p>
     <%= link_to "New post", new_topic_post_path ,class: "link"%>
