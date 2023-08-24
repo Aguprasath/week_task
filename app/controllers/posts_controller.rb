@@ -89,9 +89,9 @@ class PostsController < ApplicationController
     end
   end
   def mark_as_read
-    if current_user.read_posts.exclude?(@post)
+    #if current_user.read_posts.exclude?(@post)
       current_user.read_posts << @post
-    end
+    # end
     head :no_content
 
   end

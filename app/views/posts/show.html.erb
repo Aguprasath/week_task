@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
-<script>
-    <% if current_user.read_posts.exclude?(@post.id) %>
+<% unless current_user.read_posts.pluck(:id).include?(@post.id) %>
+  <script>
+
     document.addEventListener('DOMContentLoaded', function() {
         var postId = <%= @post.id %>;
 
@@ -10,8 +11,8 @@
         xhr.send();
         console.log('DOM content has been fully loaded.');
     });
-    <% end %>
-</script>
+  </script>
+<% end %>
 <div class="box">
   <%= render @post %>
   <br><strong> Image :</strong> <br>
