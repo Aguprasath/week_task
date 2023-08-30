@@ -1,0 +1,13 @@
+
+<div><strong> User Ratings </strong>
+</div>
+<div>
+<% @user_ratings.each do |user_rating| %>
+  <div>
+    <%= user_rating.user.email %>   -  <%= user_rating.rating %>
+  </div>
+<% end %>
+</div>
+<div>
+  <%=link_to "Back to Comments",topic_post_comments_path(@comment.post.topic,@comment.post,@comment) ,class: "link"%>
+</div>

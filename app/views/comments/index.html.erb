@@ -10,7 +10,9 @@
       <%= link_to "Show this comment",topic_post_comment_path(@post.topic,@post,comment),class:"link"%>
       <%end %>
         </p>
-  <% end %>
+    <%= render 'user_comment_ratings/form', comment: comment %>
+    <%#= link_to 'View Ratings', view_ratings_path(comment_id: comment.id),class: "link" %>
+    <% end %>
 </div>
 
 <%= link_to "New comment", new_topic_post_comment_path,class:"link" %>

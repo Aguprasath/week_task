@@ -5,6 +5,8 @@
     <%=comment.user.email %><br>
       <%end %>
     <strong>Content:</strong>
-    <%= comment.content %>
+    <%#=  comment.content %>
+    <%= link_to comment.content, view_ratings_path(comment_id: comment.id),class: "link" %>
+
   </p>
 </div>

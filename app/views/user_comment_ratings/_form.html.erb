@@ -1,0 +1,16 @@
+<%= form_with(model: [comment, UserCommentRating.new], url: user_comment_ratings_path, local: true) do |form| %>
+  <div >
+    <% [1, 2, 3, 4, 5].each do |star| %>
+      <%= radio_button_tag 'user_comment_rating[rating]', star %>
+      <%= label_tag "#{star} ⭐" %>
+    <% end %>
+  </div>
+    <%#= form.label :rating %>
+    <%#= form.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :comment_id, value: comment.id %>
+  <div>
+    <%= form.submit "submit rating" %>
+  </div>
+<% end %>
