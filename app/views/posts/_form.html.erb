@@ -1,10 +1,13 @@
-<%= form_with(model: [@topic, @post]) do |form| %>
-  <% if post.errors.any? %>
+<div id="form-container">
+<%=form_with(model: [@topic,@post], data: {remote: true},format: :js ,id: "new-post") do |form| %>
+<%#= form_with(model: [@topic, @post], remote: true,format: :js, id:"new-post" ) do |form| %>
+
+  <% if @post.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-        <% post.errors.each do |error| %>
+        <% @post.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -19,19 +22,20 @@
     <%= form.label :content, style: "display: block" %>
     <%= form.text_area :content %>
   </div>
-
   <div>
-    <%=form.label :tag_ids, 'Tags'%><br>
+    <%=form.label :tag_attributes, 'Tags' %><br>
     <% Tag.all.each do |tag| %>
 
-         <%= form.check_box :tag_ids,{multiple: true}, tag.id,nil %>
-         <%= form.label tag.name %>
-       <br>
+      <%= form.check_box :tag_ids,{multiple: true}, tag.id,nil %>
+      <%= form.label tag.name %>
+      <br>
     <% end %>
   </div>
   <div>
-    <%= form.label :tag_names, 'New Tags ' %>
-    <%= form.text_field :tag_names %>
+    <%= form.fields_for :tags_names, Tag.new do |tag_form| %>
+      <%= tag_form.label :name, 'New Tag' %>
+      <%= tag_form.text_field :name %>
+    <% end %>
   </div>
   <div>
     <%= form.file_field :image %>
@@ -40,4 +44,4 @@
     <%= form.submit %>
   </div>
 <% end %>
-
+</div>

@@ -20,8 +20,15 @@
 
       <% end %>
       </p>
-    <%= link_to "New post", new_topic_post_path ,class: "link"%>
-    <%= link_to "Back to Topics",topics_path ,class: "link"%> <br><br>
+
+    <div id="new-post-form-container">
+      <%=link_to "new post",new_topic_post_path,class:"link",remote: true %>
+    </div>
+
+    <%#= turbo_frame_tag "new_post_form" do%>
+    <%#= link_to "New post", new_topic_post_path ,class: "link"%>
+    <%#end %>
+     <%= link_to "Back to Topics",topics_path ,class: "link"%> <br><br>
     <%= link_to_previous_page @posts, '<<Previous page ' ,class: "link" %>
     <%= link_to_next_page @posts, ' Next page>>',class: "right"%>
   <%else %>
@@ -36,3 +43,14 @@
 
   <%end %>
 </div>
+<script>
+    // Show loading overlay when the page starts loading
+    window.addEventListener('beforeunload', function() {
+        document.getElementById('custom-loading-overlay').style.display = 'block';
+    });
+
+    // Hide loading overlay when the page is fully loaded
+    window.addEventListener('load', function() {
+        document.getElementById('custom-loading-overlay').style.display = 'none';
+    });
+</script>

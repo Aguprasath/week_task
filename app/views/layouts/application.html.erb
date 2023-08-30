@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<style>
+    #custom-loading-overlay{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+        display: none; /* Hide initially */
+        z-index: 1000; /* Place it above other content */
+
+    }
+    #loading-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 <html>
   <head>
     <title>Week2Demo</title>
@@ -6,12 +25,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
 
     <body>
+
+    <div id="custom-loading-overlay" >
+      <div id="loading-message">
+        <img src="<%= asset_path('loading.gif') %>" alt="Loading...">
+      </div>
+    </div>
+
     <%= yield %>
     <% if user_signed_in? %>
       <%= button_to 'Sign Out', destroy_user_session_path(@user), method: :delete %>

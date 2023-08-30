@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  validates :title,:content ,length: { minimum: 5 }
+  validates :title, presence: true
   belongs_to :topic
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :tags

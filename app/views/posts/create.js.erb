@@ -1,0 +1,14 @@
+// Display the loading image
+
+<% if @post.errors.any? %>
+
+       alert( "<%= j @post.errors.full_messages.join ", " %>" );
+       window.location.href="<%=new_topic_post_url(@post.topic,@post) %>"
+
+<% else %>
+
+alert('Post was successfully created.');
+
+    window.location.href = "<%= topic_post_path(@post.topic, @post) %>";
+
+<% end %>

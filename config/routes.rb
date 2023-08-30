@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     end
   end
   get '/posts', to: 'posts#index'
+  resources :user_comment_ratings, only: [:new, :create]
+  get 'view_ratings', to: 'user_comment_ratings#view_ratings'
 end
 

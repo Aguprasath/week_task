@@ -22,7 +22,12 @@ class PostsController < ApplicationController
 
   # GET /topics/:topic_id/posts/new
   def new
+
     @post = @topic.posts.new
+     respond_to  do |format|
+       format.js
+       format.html {render :new}
+     end
   end
 
   # GET /posts/1/edit
@@ -42,16 +47,23 @@ class PostsController < ApplicationController
       new_tags = params[:post][:tag_names].split(',').map(&:strip)
       new_tags.each { |tag_name| @post.tags << Tag.find_or_create_by(name: tag_name) }
     end
-
+    puts request.format
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
+    if @post.save
+
+          format.js
+          format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully created." }
+
+          format.json { render :show, status: :created, location: @post }
+
+
+    else
+        format.js
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    Rails.logger.info "Requested Format: #{request.format}"
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
@@ -111,6 +123,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :content,:image, tags_attributes:[:id,:name])
-   end
+    params.require(:post).permit(:title, :content,:image, tags_attributes:  [:id, :name] )
+  end
 end

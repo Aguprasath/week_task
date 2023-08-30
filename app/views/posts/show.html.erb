@@ -1,17 +1,24 @@
 <p style="color: green"><%= notice %></p>
 <% unless current_user.read_posts.pluck(:id).include?(@post.id) %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var postId = <%= @post.id %>;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '<%= mark_as_read_topic_post_path(@post.topic, @post) %>', true);
-        xhr.setRequestHeader('X-CSRF-Token', '<%= form_authenticity_token %>');
-        xhr.send();
-        console.log('DOM content has been fully loaded.');
-    });
+      $(document).ready(function() {
+          $.ajax({
+              url: '<%= mark_as_read_topic_post_path(@post.topic, @post) %>',
+              type: 'POST',
+              beforeSend: function(xhr) {
+                  xhr.setRequestHeader('X-CSRF-Token', '<%= form_authenticity_token %>');
+              },
+              success: function(response) {
+                  console.log('AJAX request for read status successful:', response);
+              },
+              error: function(xhr, status, error) {
+                  console.error('AJAX request error:', error);
+              }
+          });
+      });
   </script>
+
 <% end %>
 <div class="box">
   <%= render @post %>
