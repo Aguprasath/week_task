@@ -21,7 +21,7 @@ gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 
-#gem "turbo-rails"
+gem "turbo-rails"
 
 #Turbo.session.drive = false
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
@@ -29,6 +29,8 @@ gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+
+gem 'bullet', group: :development
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -52,7 +54,7 @@ gem 'kaminari-rspec'
 gem "image_processing", ">= 1.2"
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+ gem "sassc-rails"
 gem 'devise'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -82,3 +84,5 @@ group :test do
   gem "webdrivers"
 
 end
+
+gem "bootstrap", "~> 5.3"

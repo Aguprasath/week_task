@@ -2,6 +2,7 @@ class RatingsController < ApplicationController
   before_action :set_post
   before_action :set_rating, only: %i[ show edit update destroy ]
 
+
   # GET /ratings or /ratings.json
   def index
     @ratings = @post.ratings.all
@@ -70,4 +71,5 @@ class RatingsController < ApplicationController
     def rating_params
       params.require(:rating).permit(:star, :post_id)
     end
+
 end

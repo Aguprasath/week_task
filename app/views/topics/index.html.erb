@@ -6,7 +6,7 @@
   <% @topics.each do |topic| %>
       <%= render topic %>
 
-      <%= link_to "Show this topic", topic ,class: "link"%><br><br>
+      <%= link_to "Show this topic", topic ,class: "btn btn-primary"%><br><br>
       <%= link_to "Show Posts",topic_posts_path(topic),class: "link" %>
     <br>
   <% end %>

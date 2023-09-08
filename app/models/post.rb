@@ -8,12 +8,19 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :read_by_users, class_name: 'User', join_table: :posts_users_read_statuses
 
   belongs_to :user
-  def average_rating
-    return 0 if ratings.empty?
-    ratings.average(:star).truncate(1)
+
+  scope :filter_by_date,->(start_date,to_date){ (where "Date(posts.created_at) >=? and Date(posts.created_at)<=?",start_date,to_date) }
+  # def average_rating
+  #   return 0 if ratings.empty?
+  #   ratings.average(:star).truncate(1)
+  # end
+   # def comment_count
+   #    return 0 if comments.empty?
+   #    comments.count
+   # end
+  def update_rating_average
+    new_average = ratings.average(:star)
+    update_column(:rating_average, new_average)
   end
-   def comment_count
-      return 0 if comments.empty?
-      comments.count
-   end
+
 end

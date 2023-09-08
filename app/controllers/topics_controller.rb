@@ -4,10 +4,12 @@ class TopicsController < ApplicationController
   # GET /topics or /topics.json
   def index
     @topics = Topic.all
+
   end
 
   # GET /topics/1 or /topics/1.json
   def show
+
   end
 
   # GET /topics/new

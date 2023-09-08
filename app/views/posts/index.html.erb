@@ -32,16 +32,29 @@
     <%= link_to_previous_page @posts, '<<Previous page ' ,class: "link" %>
     <%= link_to_next_page @posts, ' Next page>>',class: "right"%>
   <%else %>
-    <% @posts.each do |post| %>
-      <%= render post %><br>
-      <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
+    <%#= form_tag posts_path ,method: :get do %>
+<!--      <%#=date_field 'start_date',params[:start_date] %><br>-->
+      <%#= date_field 'to_date',params[:to_date] %>
+      <%#=submit_tag 'find' %>
+    <%# end %>
+    <%=form_with(model: Post.new,url:posts_path,method: :get) do |f|%>
+      <%=f.date_field :start_date %><br>
+      <%= f.date_field :to_date %>
+      <%=f.submit 'find' %>
+      <%end %>
 
-<% end %>
-    <br><br>
-    <%= link_to_previous_page @posts, '<< Previous page ' ,class: "link" %>
-    <%= link_to_next_page @posts, ' Next page >>',class: "right"  %>
+   <% @posts.each do |post| %>
+          <%= render post %><br>
+          <%= link_to "Show this post", topic_post_path(post.topic, post) ,class: "link" %>
+        <%end %>
+      <br><br>
+    <%#= paginate @posts, params: { start_date: @start_date, to_date: @to_date }  %>
+      <%= link_to_previous_page @posts, '<< Previous page ', params: {post: { start_date: @start_date, to_date: @to_date } },class: "link" %>
+      <%= link_to_next_page @posts, ' Next page >>', params: { post: { start_date: @start_date, to_date: @to_date } },class: "right"  %>
+    <% end %>
 
-  <%end %>
+
+
 </div>
 <script>
     // Show loading overlay when the page starts loading

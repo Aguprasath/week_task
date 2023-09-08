@@ -4,10 +4,20 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   # GET /topics/:topic_id/posts or /topics/:topic_id/posts.json
   def index
-    if (params[:topic_id].present?)
-      @posts = @topic.posts.page(params[:page]).per(3)
+    if params[:topic_id].present?
+      @posts = @topic.posts.eager_load(:user, :tags, :ratings, :comments).page(params[:page]).per(3)
     else
-      @posts=Post.page(params[:page]).per(3)
+      if params[:post].present?
+        @start_date = params[:post][:start_date].present? ? Date.parse(params[:post][:start_date].to_s) : Date.yesterday
+        @to_date = params[:post][:to_date].present? ? Date.parse(params[:post][:to_date].to_s) : Date.today
+      else
+
+        @start_date = Date.yesterday
+        @to_date = Date.today
+      end
+      #puts @start_date,@to_date
+      @posts = Post.filter_by_date(@start_date,@to_date).eager_load(:topic,:user, :tags, :ratings, :comments).page(params[:page]).per(3)
+
     end
 
   end
@@ -69,7 +79,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     #authorize! :update, @post
-     @post.tags = Tag.where(id: params[:post][:tag_ids])
+    @post.tags = Tag.where(id: params[:post][:tag_ids])
      if params[:post][:tag_ids].present?
        @post.tags = Tag.where(id: params[:post][:tag_ids])
      end
@@ -107,6 +117,7 @@ class PostsController < ApplicationController
     head :no_content
 
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

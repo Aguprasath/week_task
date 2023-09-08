@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
   # GET /comments or /comments.json
   def index
-    @comments = @post.comments.all
+    @comments = @post.comments.eager_load(:user).all
   end
 
   # GET /comments/1 or /comments/1.json
