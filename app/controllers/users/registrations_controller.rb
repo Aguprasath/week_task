@@ -13,9 +13,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def create
     super do |resource|
       if resource.persisted?
-        SendSignupEmailJob.perform_later(resource)
+        user_data = {
+          'id' => resource.id,
+          'email' => resource.email,
+          'created_at' => resource.created_at.to_s,
+          'updated_at' => resource.updated_at.to_s,
+
+        }
+        UserMailerJob.perform_in(10.seconds.from_now,user_data)
       end
     end
+
   end
 
   # GET /resource/edit

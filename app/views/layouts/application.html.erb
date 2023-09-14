@@ -67,12 +67,41 @@
       </div>
     </div>
     <div class="container-fluid">
-      <%= yield %>
       <% if user_signed_in? %>
-        <%= button_to 'Sign Out', destroy_user_session_path(@user), method: :delete ,class: "btn btn-danger" %>
-
+        Logged in as <strong><%= current_user.email %></strong> |
+        <%= link_to 'Show profile', edit_user_registration_path%>
+        <%= link_to 'Edit Profile', '#', class: 'btn btn-primary', data: { bs_toggle: 'modal', bs_target: '#exampleModal' } %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path %> |
+        <%= link_to "Login", new_user_session_path %>
       <% end %>
+      <!-- Button trigger modal -->
+
+
+      <!-- Modal -->
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Profile Form</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            </div>
+            <div class="modal-body">
+
+                 <%=render 'devise/registrations/form' %>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+      <%= yield %>
+    </div>
+
+
 
 
 

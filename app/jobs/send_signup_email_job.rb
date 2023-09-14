@@ -1,8 +1,7 @@
 class SendSignupEmailJob < ApplicationJob
-  queue_as :default
+   #include Sidekiq::job
 
    def perform(user)
-     #user = User.find(user_id)
       UserMailer.signup_confirmation(user).deliver_later
-    end
+   end
 end
